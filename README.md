@@ -29,7 +29,7 @@
   
   <body style="margin : 0px; overflow: hidden;">
     <div class="arjs-loader">
-      <div>Loading, please wait...</div>
+      <div>Loading, please wait...readme</div>
     </div>
 
     <!-- a-frame scene -->
