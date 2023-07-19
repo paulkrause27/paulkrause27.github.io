@@ -43,47 +43,29 @@
     
       <a-assets>
         <a-asset-item id="affe" src ="assets/affe.gltf"></a-asset-item>
-        <a-asset-item id="kranich" src ="assets/Kranich4.gltf"></a-asset-item>
+        <a-asset-item id="qr" src ="assets/qr animation.glb"></a-asset-item>
       </a-assets>
     
 
       <a-nft
         type="nft"
-        url="assets/superdry"
+        url="assets/qr"
         smooth="true"
         smoothCount="10"
         smoothTolerance=".01"
         smoothThreshold="5"
       >
+        
+        <a-sphere position="0 0 0" rotation="0 0 0" scale="20  20  20" color="green"></a-sphere>
+        
         <a-entity
-          gltf-model="#affe"
-          scale="0.1 0.1 0.1"
+          gltf-model="#qr"
+          scale="1 1 1"
           position="0 0 0"
         ></a-entity>
-        
-        <a-sphere position="0 0 0" rotation="0 0 0" scale="20  20  20" color="green"></a-box>
 
       </a-nft>
 
-      <a-marker type="barcode" value="0">
-
-        <a-entity
-          gltf-model="#affe"
-          scale="0.1 0.1 0.1"
-          position="0 0 0"
-        ></a-entity>
-
-        <a-box position="0 0 0" rotation="0 0 0" scale="1  1  1" color="red"></a-box>
-      </a-marker>
-      <a-marker type="barcode" value="1" size="4000" smoot="true">
-
-        <a-entity
-          gltf-model="#affe"
-          scale="0.1 0.1 0.1"
-        ></a-entity>
-
-        <a-box color="blue"></a-box>
-      </a-marker>
 
       <!-- static camera that moves according to the device movemenents -->
       <a-entity camera></a-entity>

@@ -41,11 +41,10 @@
       embedded arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
     >
     
-      <a-assets>
-        <a-asset-item id="qr" src ="assets/qr animation.glb"></a-asset-item>
-      </a-assets>
-    
-
+    <a-assets>
+      <a-asset-item id="qr" src ="assets/qr animation.glb"></a-asset-item>
+    </a-assets>
+  
       <a-nft
         type="nft"
         url="assets/qr"
@@ -58,18 +57,32 @@
           gltf-model="#qr"
           scale="1 1 1"
           position="0 0 0"
+          animation-mixer
         ></a-entity>
 
-        <a-entity
-          gltf-model="assets/qr_animations.glb"
-          scale="1 1 1"
-          position="0 0 0"
-        ></a-entity>
-
-        <a-sphere position="0 0 0" rotation="0 0 0" scale="20  20  20" color="green"></a-box>
+        <a-sphere position="0 0 0" rotation="0 0 0" scale="20  20  20" color="green"></a-sphere>
 
       </a-nft>
 
+      <a-marker
+        type="pattern"
+        url="assets/marker.jpg"
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance=".01"
+        smoothThreshold="5">
+
+        <a-entity
+          gltf-model="#qr"
+          scale="1 1 1"
+          position="0 0 0"
+          animation-mixer
+        ></a-entity>
+
+        <a-sphere position="0 0 0" rotation="0 0 0" scale="20  20  20" color="green"></a-sphere>
+
+
+      </a-marker>
 
       <!-- static camera that moves according to the device movemenents -->
       <a-entity camera></a-entity>
