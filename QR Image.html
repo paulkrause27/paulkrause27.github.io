@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Hello, QR!</title>
+	<title>QR!</title>
 	<!-- include three.js library -->
 	<script src='js/three.js'></script>
 	<script src='js/OBJLoader.js'></script>
 	<script src='js/MTLLoader.js'></script>
+	<script src='js/GLTFLoader.js'></script>
 	<!-- include jsartookit -->
 	<script src="jsartoolkit5/artoolkit.min.js"></script>
 	<script src="jsartoolkit5/artoolkit.api.js"></script>
@@ -32,6 +33,8 @@ var arToolkitSource, arToolkitContext;
 var markerRoot1;
 
 var mesh1;
+
+var mixer;
 
 initialize();
 animate();
@@ -60,6 +63,8 @@ function initialize()
 	clock = new THREE.Clock();
 	deltaTime = 0;
 	totalTime = 0;
+
+	
 	
 	////////////////////////////////////////////////////////////
 	// setup arToolkitSource
@@ -125,7 +130,7 @@ function initialize()
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
 	
-	new THREE.MTLLoader()
+	/*new THREE.MTLLoader()
 		.setPath( 'models/' )
 		.load( 'qr.mtl', function ( materials ) {
 			materials.preload();
@@ -140,6 +145,37 @@ function initialize()
 					markerRoot1.add(mesh0);
 				}, onProgress, onError );
 		});
+	*/
+	new THREE.GLTFLoader()
+	.load(
+		// resource URL
+		'models/qr.glb',
+		// called when the resource is loaded
+		function ( gltf ) {
+
+			
+			
+			mixer = new THREE.AnimationMixer( gltf.scene);
+			
+			mixer.clipAction(gltf.animations[0]).play();
+
+			markerRoot1.add( gltf.scene );
+
+		},
+		// called while loading is progressing
+		function ( xhr ) {
+
+			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+		},
+		// called when loading has errors
+		function ( error ) {
+
+			console.log( 'An error happened' );
+
+		}
+	);
+
 }
 
 
@@ -148,12 +184,14 @@ function update()
 	// update artoolkit on every frame
 	if ( arToolkitSource.ready !== false )
 		arToolkitContext.update( arToolkitSource.domElement );
+	
 }
 
 
 function render()
 {
 	renderer.render( scene, camera );
+
 }
 
 
@@ -161,6 +199,7 @@ function animate()
 {
 	requestAnimationFrame(animate);
 	deltaTime = clock.getDelta();
+	mixer.update(deltaTime);
 	totalTime += deltaTime;
 	update();
 	render();
