@@ -3,7 +3,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<title>QR!</title>
 	<!-- include three.js library -->
-	<script src='./js/three.js'></script>
+	<script src='js/three.js'></script>
 	<script src='js/OBJLoader.js'></script>
 	<script src='js/MTLLoader.js'></script>
 	<!-- include jsartookit -->
@@ -23,8 +23,9 @@
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
 -->
 
-<script type='module'>
-import { GLTFLoader } from './js/GLTFLoader.js';
+<script>
+import {GLTFLoader} from 'js/GLTFLoader.js';
+
 
 var scene, camera, renderer, clock, deltaTime, totalTime;
 
@@ -34,7 +35,6 @@ var markerRoot1;
 
 var mesh1;
 
-var mixer;
 
 initialize();
 animate();
@@ -153,12 +153,6 @@ function initialize()
 		// called when the resource is loaded
 		function ( gltf ) {
 
-			
-			
-			mixer = new THREE.AnimationMixer( gltf.scene);
-			
-			mixer.clipAction(gltf.animations[0]).play();
-
 			markerRoot1.add( gltf.scene );
 
 		},
@@ -199,8 +193,6 @@ function animate()
 {
 	requestAnimationFrame(animate);
 	deltaTime = clock.getDelta();
-	if(mixer)
-		mixer.update(deltaTime);
 	totalTime += deltaTime;
 	update();
 	render();
