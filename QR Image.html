@@ -25,7 +25,7 @@
 -->
 
 <script>
-
+import { GLTFLoader } from 'js/GLTFLoader.js'
 var scene, camera, renderer, clock, deltaTime, totalTime;
 
 var arToolkitSource, arToolkitContext;
@@ -146,7 +146,7 @@ function initialize()
 				}, onProgress, onError );
 		});
 	*/
-	new THREE.GLTFLoader()
+	new GLTFLoader()
 	.load(
 		// resource URL
 		'models/qr.glb',
