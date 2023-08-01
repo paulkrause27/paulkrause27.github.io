@@ -138,7 +138,7 @@ function initialize()
 				.setPath( 'models/' )
 				.load( 'qr.obj', function ( group ) {
 					mesh = group;
-					mesh.rotation.x = 90;
+					mesh.rotation.x = Math.Pi / 2;
 					mesh.scale.set(0.25,0.25,0.25);
 
 					markerRoot1.add(mesh);
