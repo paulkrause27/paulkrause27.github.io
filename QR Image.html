@@ -23,8 +23,7 @@
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
 -->
 
-<script type="module">
-import {GLTFLoader} from 'js/GLTFLoader.js';
+<script>
 
 
 var scene, camera, renderer, clock, deltaTime, totalTime;
@@ -130,7 +129,7 @@ function initialize()
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
 	
-	/*new THREE.MTLLoader()
+	new THREE.MTLLoader()
 		.setPath( 'models/' )
 		.load( 'qr.mtl', function ( materials ) {
 			materials.preload();
@@ -138,14 +137,14 @@ function initialize()
 				.setMaterials( materials )
 				.setPath( 'models/' )
 				.load( 'qr.obj', function ( group ) {
-					mesh0 = group.children[0];
-					mesh0.material.side = THREE.DoubleSide;
+					mesh0 = group.scene;
 					mesh0.position.y = 0.25;
 					mesh0.scale.set(0.25,0.25,0.25);
 					markerRoot1.add(mesh0);
 				}, onProgress, onError );
 		});
-	*/
+	
+	/*
 	new GLTFLoader()
 	.load(
 		// resource URL
@@ -169,6 +168,7 @@ function initialize()
 
 		}
 	);
+	*/
 
 }
 
