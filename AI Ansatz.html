@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>AR-Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/2.10.0/aframe.min.js"></script>
+</head>
+<body>
+    <h1>AR-Website</h1>
+    <div id="ar-container"></div>
+    <script>
+        // Erstelle einen 3D-Renderer
+        const renderer = new THREE.WebGLRenderer({
+            scene: new THREE.Scene(),
+            canvas: document.querySelector("#ar-container")
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Erstelle ein 3D-Objekt
+        const object = new THREE.Mesh(
+            new THREE.BoxGeometry(10, 10, 10),
+            new THREE.MeshBasicMaterial({color: "red"})
+        );
+        scene.add(object);
+
+        // Erstelle einen QR-Code
+        const qrcode = document.querySelector(".qrcode");
+        const qrcodeData = "qrcodeai.png";
+        qrcode.src = `data:image/png;base64,${qrcodeData}`;
+
+        // Erstelle eine AR-Anwendung
+        const aframe = new AFRAME.Scene({
+            el: document.querySelector("#ar-container")
+        });
+        const camera = new AFRAME.Camera(aframe, {
+            position: {x: 0, y: 0, z: 0}
+        });
+        const controller = new AFRAME.Controller(aframe);
+
+        // Setze den 3D-Renderer als AR-Renderer
+        aframe.setRenderer(renderer);
+
+        // Füge das 3D-Objekt zur AR-Anwendung hinzu
+        aframe.add(object);
+
+        // Initialisiere die AR-Anwendung
+        aframe.init();
+
+        // Scanne den QR-Code, um das 3D-Objekt anzuzeigen
+        const onQRCodeScan = (event) => {
+            // Verschiebe das 3D-Objekt in die Mitte des QR-Codes
+            const qrcodePosition = event.target.getBoundingClientRect();
+            object.position.set(
+                qrcodePosition.x + qrcode.width / 2,
+                qrcodePosition.y + qrcode.height / 2,
+                0
+            );
+        };
+        qrcode.addEventListener("click", onQRCodeScan);
+    </script>
+</body>
+</html>
