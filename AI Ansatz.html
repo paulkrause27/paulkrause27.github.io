@@ -6,8 +6,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/2.10.0/aframe.min.js"></script>
 </head>
 <body>
-    <h1>AR-Website1</h1>
-    <div id="ar-container"></div>
+    <h1>AR-Website</h1>
+    <div id="ar-container" style="display: block;">
+    </div>
     <script>
         // Erstelle einen 3D-Renderer
         const renderer = new THREE.WebGLRenderer({
@@ -57,9 +58,9 @@
             );
         };
         qrcode.addEventListener("click", onQRCodeScan);
-    
-		 // Aktiviere die Kamera
-		 aframe.camera.enableWebGL = true;
-	</script>
+
+        // Aktiviere die Kamera
+        aframe.camera.enableWebGL = true;
+    </script>
 </body>
 </html>
